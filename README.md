@@ -1,5 +1,5 @@
 # IONOS-Core-DNS-cert-manager-lets-encrypt-K8s-webhook
-A scripted cert-manager, IONOS Core DNS webhook, installation on IONOS Managed Kubernetes for automatic installation and update of TLS certificates via the free "Let's Encrypt" ACME service. 
+A scripted Cert-Manager & IONOS Core DNS webhook installation on IONOS Managed Kubernetes for automatic installation and update of TLS certificates for IONOS Core domains via the free "Let's Encrypt" ACME service. 
 
 Pre-requisites: 
 1. An IONOS Managed Kubernetes instance deployed (i.e. https://dcd.ionos.com/latest/ etc)
