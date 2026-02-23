@@ -5,7 +5,7 @@ Pre-requisites:
 1. An IONOS Managed Kubernetes instance deployed (i.e. https://dcd.ionos.com/latest/ etc)
 2. A functioning Linux management host with Kubectl working towards the IONOS Managed Kubernetes cluster and Helm installed
 3. A reserved IP address from the IONOS DCD for the demo NGINX ingress and webserver in Kubernetes 
-4. IONOS Core account with registered DNS names that require TLS certificates issued automatically. this would have the IP address from above entered as an A-record. (i.e. https://login.ionos.de/ or https://login.ionos.co.uk/ etc)
+4. IONOS Core account with registered DNS names that require TLS certificates issued automatically. This would have the IP address from above entered as an A-record. (i.e. https://login.ionos.de/ or https://login.ionos.co.uk/ etc)
 5. IONOS Core DNS functioning API access - this requires activation in your account. Once completed, you will have two important pieces of data: the Public prefix and the secret. (i.e. https://developer.hosting.ionos.de/keys )
 
 There are two main components: 
