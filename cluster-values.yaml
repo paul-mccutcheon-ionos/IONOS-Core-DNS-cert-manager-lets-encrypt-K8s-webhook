@@ -1,0 +1,9 @@
+# Global Identity
+acme_email: "user@email.com"
+
+# IONOS Core DNS API Authentication
+ionos_public_prefix: "insert your prefix here"
+ionos_secret: "insert your secret here"
+
+# Shared Infrastructure Names
+issuer_name: "ionos-letsencrypt-issuer"

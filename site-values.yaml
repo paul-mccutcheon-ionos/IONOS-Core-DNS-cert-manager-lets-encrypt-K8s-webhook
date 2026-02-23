@@ -1,0 +1,9 @@
+# site-values.yaml
+site:
+  namespace: "my-app"
+  domain: "www.example.com"
+  alt_domain: "example.com"
+  # This is your IONOS reserved/static IP
+  loadBalancerIP: "123.123.123.123"
+  issuer_name: "ionos-letsencrypt-issuer"
+  tls_secret_name: "myapp-tls-secret-www3"
