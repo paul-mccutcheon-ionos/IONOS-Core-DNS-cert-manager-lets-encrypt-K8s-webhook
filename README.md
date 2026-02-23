@@ -27,7 +27,7 @@ Check the installation with the appropriate health check script:
 
 ./health-check-infra.sh
 
-When part a is succesessfully installed, continue with the installation script for part b) the demo ingress and web server
+When part a) is succesessfully installed, continue with the installation script for part b) for the demo ingress and web server
 
 ./deploy-web-app.sh
 
