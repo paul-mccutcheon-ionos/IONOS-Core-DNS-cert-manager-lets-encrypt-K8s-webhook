@@ -15,24 +15,22 @@ b) A sample NGINX ingress and NGINX web server container configured with your do
 
 Each installation has a preset values YAML file that enable you to enter your custom variables, such as your IONOS Core DNS secret for accessing the API, the domain name in the DNS that the TLS is to be issued for, the desired namespace name in Kubernetes cluster etc.
 
-For part a) there is a "cluster-values.yaml" file, that you can populate with your specific values
-  # Global Identity
-  acme_email: "your@email.com"
+For part a) there is a "cluster-values.yaml" file, that you can populate with your specific values.
+For part b) there is the "site-values.yaml" file, that you can edit and populate with your specific values for the web application.
 
-  # IONOS Core DNS API Authentication
-  ionos_public_prefix: "3dec2bdec6954d3e9d24a504a5912345"
-  ionos_secret: "dyKrAWstgLBE-WmXc3FwV0-4J4KlnbnhRROQJmJb3BH5_Sa0IhKD0oxZrIlIgx0Abx1Ldnaz9xuw4wX123456"
+When the YAML files have been edited to suit your requriements, go ahead and run the install for part a) that installs cert-manager and creates the clusterIssuer:
 
-  # Shared Infrastructure Names
-  issuer_name: "ionos-letsencrypt-issuer"
+chmod +x *.sh
+./setup-ionos-infrastructure.sh
 
-for part b) there is the "site-values.yaml" file, that you can edit and populate with your specific values for the web application:
-  # site-values.yaml
-  site:
-    namespace: "my-web-app"
-    domain: "www.example.com"
-    alt_domain: "example.com"
-    # This is your IONOS reserved/static IP
-    loadBalancerIP: "123.123.123.123"
-    issuer_name: "ionos-letsencrypt-issuer"
-    tls_secret_name: "my-web-app-tls-secret-www"
+Check the installation with the appropriate health check script:
+
+./health-check-infra.sh
+
+When part a is succesessfully installed, continue with part b) the demo ingress and web server
+
+./deploy-web-app.sh
+
+Check the installation with the appropriate health check script:
+
+./health-check-app.sh
