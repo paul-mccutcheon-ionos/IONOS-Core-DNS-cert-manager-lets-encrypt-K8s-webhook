@@ -9,7 +9,7 @@ Pre-requisites:
 5. IONOS Core DNS functioning API access - this requires activation in your account. Once completed, you will have two important pieces of data: the Public prefix and the secret. (i.e. https://developer.hosting.ionos.de/keys )
 
 There are two main components: 
-a) The main cluster installation that results in a functioning "ClusterIssuer" in the cert-manager namespace, so that various other cluster applications in seperate namespaces may reference this issuer to execute the issueing of new TLS certs, and automatic renewal of expired TLS certificates for your particular domain.
+a) The main cluster installation that results in a functioning "ClusterIssuer" in the cert-manager namespace, so that various other cluster applications in seperate namespaces may reference this issuer to execute the issuing of new TLS certs, and automatic renewal of expired TLS certificates for your particular domain.
 This component utilises the opensource IONOS Webhook for Core DNS and lLt's Encrypt originally written by fabmade.de.  I have complied this and stored the executable in my public Duckerhub account.
 b) A sample NGINX ingress and NGINX web server container configured with your domain name.  This namespace is where the TLS certificate will be issued to and stored in the K8s cluster.
 
