@@ -2,7 +2,7 @@
 A scripted cert-manager, IONOS Core DNS webhook, installation on IONOS Managed Kubernetes for automatic installation and update of TLS certificates via the free "Let's Encrypt" ACME service. 
 
 Pre-requisites: 
-1. An IONOS Managed Kubernetes instance depployed (i.e. https://dcd.ionos.com/latest/ etc)
+1. An IONOS Managed Kubernetes instance deployed (i.e. https://dcd.ionos.com/latest/ etc)
 2. A functioning Linux management host with Kubectl working towards the IONOS Managed Kubernetes cluster and Helm installed
 3. A reserved IP address from the IONOS DCD for the demo NGINX ingress and webserver in Kubernetes 
 4. IONOS Core account with registered DNS names that require TLS certificates issued automatically.  (i.e. https://login.ionos.de/ or https://login.ionos.co.uk/ etc)
