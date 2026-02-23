@@ -1,16 +1,27 @@
 #!/bin/bash
 
-# --- 0. PARSE SITE VALUES ---
-if [ ! -f site-values.yaml ]; then
-    echo "❌ Error: site-values.yaml not found."
+# Get the directory where the script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+YAML_PATH="$SCRIPT_DIR/site-values.yaml"
+
+# --- 0. PARSE SITE VALUES (Corrected for site: prefix) ---
+if [ ! -f "$YAML_PATH" ]; then
+    echo "❌ Error: site-values.yaml not found at $YAML_PATH"
     exit 1
 fi
 
-# Extracting values and cleaning quotes/spaces/hidden characters
-APP_NAMESPACE=$(grep "app_namespace" site-values.yaml | cut -d':' -f2- | tr -d '"\r ' | xargs)
-CERT_NAME=$(grep "cert_name" site-values.yaml | cut -d':' -f2- | tr -d '"\r ' | xargs)
-INGRESS_NAME=$(grep "ingress_name" site-values.yaml | cut -d':' -f2- | tr -d '"\r ' | xargs)
-DEPLOYMENT_NAME=$(grep "deployment_name" site-values.yaml | cut -d':' -f2- | tr -d '"\r ' | xargs)
+# Updated to match your actual site-values.yaml keys
+APP_NAMESPACE=$(grep "namespace:" "$YAML_PATH" | cut -d':' -f2- | tr -d '"\r ' | xargs)
+CERT_NAME=$(grep "tls_secret_name:" "$YAML_PATH" | cut -d':' -f2- | tr -d '"\r ' | xargs)
+# Since your YAML doesn't have these specifically, we'll set defaults or use the domain
+INGRESS_NAME="site-ingress" 
+DEPLOYMENT_NAME="nginx-web"
+
+# CRITICAL SAFETY CHECK
+if [ -z "$APP_NAMESPACE" ] || [ -z "$CERT_NAME" ]; then
+    echo "❌ Error: Could not parse 'namespace' or 'tls_secret_name' from site-values.yaml"
+    exit 1
+fi
 
 echo "========================================================"
 echo "  CLEANUP: Removing App [$DEPLOYMENT_NAME] from $(kubectx -c)"
