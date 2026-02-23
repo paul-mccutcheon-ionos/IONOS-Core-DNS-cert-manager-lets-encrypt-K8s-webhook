@@ -1,38 +1,36 @@
 #!/bin/bash
-# set -e  # We don't use -e here so the script continues even if a resource is already gone
+
+# --- 0. PARSE CLUSTER VALUES ---
+if [ ! -f cluster-values.yaml ]; then
+    echo "⚠️ Warning: cluster-values.yaml not found. Using defaults."
+    ISSUER_NAME="ionos-letsencrypt-issuer"
+else
+    ISSUER_NAME=$(grep "issuer_name" cluster-values.yaml | cut -d':' -f2- | tr -d '"\r ' | xargs)
+fi
 
 echo "========================================================"
 echo "  CLEANUP: Removing Infrastructure from $(kubectx -c)"
+echo "  Target Issuer: $ISSUER_NAME"
 echo "========================================================"
 
-# --- 1. APISERVICE ---
+# --- 1. Removing APIService ---
+# This is usually the same regardless of naming
 echo "--- Removing APIService ---"
 kubectl delete apiservice v1alpha1.acme.fabmade.de --ignore-not-found
 
-# --- 2. CLUSTER-WIDE ISSUERS ---
-echo "--- Removing ClusterIssuers ---"
-# This deletes any clusterissuer, but we target the webhook-specific ones
-kubectl delete clusterissuer ionos-issuer --ignore-not-found
-kubectl delete clusterissuer ionos-webhook-issuer --ignore-not-found
+# --- 2. Removing ClusterIssuer ---
+# This now uses the name from your YAML
+echo "--- Removing ClusterIssuer: $ISSUER_NAME ---"
+kubectl delete clusterissuer "$ISSUER_NAME" --ignore-not-found
 
-# --- 3. RBAC (Global) ---
+# --- 3. Removing Global RBAC ---
 echo "--- Removing Global RBAC ---"
-kubectl delete clusterrole cert-manager-webhook-ionos:solver --ignore-not-found
-kubectl delete clusterrolebinding cert-manager-webhook-ionos:solver --ignore-not-found
 kubectl delete clusterrolebinding cert-manager-webhook-ionos:auth-delegator --ignore-not-found
 
-# --- 4. NAMESPACE (Local) ---
+# --- 4. Removing cert-manager Namespace ---
 echo "--- Removing cert-manager Namespace ---"
-echo "(This may take a minute as it cleans up all internal resources...)"
 kubectl delete namespace cert-manager --wait=true --ignore-not-found
 
-# --- 5. CRD CLEANUP (Optional but recommended for a 'True' reset) ---
-# Note: Deleting CRDs will delete ALL cert-manager resources in ALL namespaces.
-# If you want a 100% clean slate for cert-manager itself, uncomment these:
-# echo "--- Removing cert-manager CRDs ---"
-# kubectl delete crd certificates.cert-manager.io certificaterequests.cert-manager.io challenges.cert-manager.io clusterissuers.cert-manager.io issuers.cert-manager.io orders.cert-manager.io --ignore-not-found
-
 echo "========================================================"
-echo "✅ Cleanup Complete on $(kubectx -c)"
-echo "You can now safely run ./setup-ionos-infrastructure.sh"
+echo "✅ Infrastructure Cleanup Complete."
 echo "========================================================"
