@@ -6,7 +6,7 @@ Pre-requisites:
 2. A functioning Linux management host with Kubectl working towards the IONOS Managed Kubernetes cluster and Helm installed
 3. A reserved IP address from the IONOS DCD for the demo NGINX ingress and webserver in Kubernetes 
 4. IONOS Core account with registered DNS names that require TLS certificates issued automatically. This would have the IP address from above entered as an A-record. (i.e. https://login.ionos.de/ or https://login.ionos.co.uk/ etc)
-5. IONOS Core DNS functioning API access - this requires activation in your account. Once completed, you will have two important pieces of data: the Public prefix and the secret. (i.e. https://developer.hosting.ionos.de/keys )
+5. IONOS Core DNS functioning API access - this requires activation in your account. Once completed, you will have two important pieces of data: the Public prefix (32 characters) and the secret (86 characters). (i.e. https://developer.hosting.ionos.de/keys )
 
 There are two main components: 
 a) The main cluster installation that results in a functioning "ClusterIssuer" in the cert-manager namespace, so that various other cluster applications in seperate namespaces may reference this issuer to execute the issuing of new TLS certs, and automatic renewal of expired TLS certificates for your particular domain.
