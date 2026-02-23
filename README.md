@@ -10,7 +10,7 @@ Pre-requisites:
 
 There are two main components: 
 a) The main cluster installation that results in a functioning "ClusterIssuer" in the cert-manager namespace, so that various other cluster applications in seperate namespaces may reference this issuer to execute the issuing of new TLS certs, and automatic renewal of expired TLS certificates for your particular domain.
-This component utilises the opensource IONOS Webhook for Core DNS and Let's Encrypt originally written by fabmade.de.  I have complied this and stored the built container in my public Duckerhub repository.
+This component utilises the opensource IONOS Webhook for Core DNS and Let's Encrypt originally written by fabmade.de.  I have complied this and stored the built container in my public DockerHub repository.
 b) A sample NGINX ingress and NGINX web server container configured with your domain name.  This namespace is where the TLS certificate will be issued to and stored in the K8s cluster.
 
 Each installation has a preset values YAML file that enable you to enter your custom variables, such as your IONOS Core DNS secret for accessing the API, the domain name in the DNS that the TLS is to be issued for, the desired namespace name in Kubernetes cluster etc.
