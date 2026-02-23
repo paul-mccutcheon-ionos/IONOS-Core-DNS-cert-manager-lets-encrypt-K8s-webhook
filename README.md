@@ -34,3 +34,5 @@ When part a is succesessfully installed, continue with the installation script f
 Check the installation with the appropriate health check script:
 
 ./health-check-app.sh
+
+Un-installation: There are two cleanup scripts provided to gracefully remove all changes to the cluster. cleanup-infrastrcture.sh and cleanup-web-app.sh
