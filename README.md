@@ -18,16 +18,16 @@ Each installation has a preset values YAML file that enable you to enter your cu
 For part a) there is a "cluster-values.yaml" file, that you can populate with your specific values.
 For part b) there is the "site-values.yaml" file, that you can edit and populate with your specific values for the web application.
 
-When the YAML files have been edited to suit your requriements, go ahead and run the install for part a) that installs cert-manager and creates the clusterIssuer:
+When the YAML files have been edited to suit your requriements, go ahead and run the installation script for part a) that installs cert-manager and creates the clusterIssuer:
 
-chmod +x *.sh
+chmod +x *.sh;
 ./setup-ionos-infrastructure.sh
 
 Check the installation with the appropriate health check script:
 
 ./health-check-infra.sh
 
-When part a is succesessfully installed, continue with part b) the demo ingress and web server
+When part a is succesessfully installed, continue with the installation script for part b) the demo ingress and web server
 
 ./deploy-web-app.sh
 
